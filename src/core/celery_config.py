@@ -9,15 +9,13 @@ celery_app = Celery(
     backend=settings.CELERY_RESULT_BACKEND,
 )
 
-celery_app.autodiscover_tasks(['src.apps.tasks.currency'])
-
-# celery_app.conf.update(imports=['src.apps.tasks.currency.download_currencies_task'])
+celery_app.autodiscover_tasks(["src.apps.tasks.currency"])
 
 celery_app.conf.beat_schedule = {
-    'get_currencies': {
-        'task': 'src.apps.tasks.currency.download_currencies_task',
-        'schedule': crontab(hour=0, minute=33),
-        'args': (16, 16),
+    "get_currencies": {
+        "task": "src.apps.tasks.currency.download_currencies_task",
+        "schedule": crontab(hour=0, minute=33),
+        "args": (16, 16),
     },
 }
-celery_app.conf.timezone = 'Europe/Moscow'
+celery_app.conf.timezone = "Europe/Moscow"

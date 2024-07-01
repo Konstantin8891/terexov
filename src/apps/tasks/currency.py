@@ -1,30 +1,16 @@
-from datetime import datetime
-
 import asyncio
 import xml.etree.ElementTree as ET
+from datetime import datetime
 
+import aiohttp
 from fastapi import HTTPException
 from inflection import underscore
 
-import aiohttp
-
 from src.apps.models.currency import Currency
 from src.core.celery_config import celery_app
-from src.db.session import get_db, async_session
+from src.db.session import async_session
 
 
-# @celery.on_after_configure.connect
-# def setup_periodic_tasks(sender, **kwargs):
-#     sender.add_periodic_task(
-#         crontab(hour=21, minute=51),
-#         download_currencies(),
-#     )
-
-
-# @celery_app.task(name="get_currencies")
-
-
-# @celery_app.task(name="get_currencies")
 async def download_currencies() -> None:
     try:
         db = async_session()
@@ -53,7 +39,6 @@ async def download_currencies() -> None:
         raise HTTPException(status_code=408, detail="Сервис недоступен")
 
 
-# @celery_app.task(name="get_currencies")
 @celery_app.task
 def download_currencies_task(*args):
     asyncio.run(download_currencies())

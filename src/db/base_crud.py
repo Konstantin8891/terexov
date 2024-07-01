@@ -14,7 +14,7 @@ class CRUDBase(Generic[ModelType]):
         **Parameters**
 
         * `model`: A SQLAlchemy model class
-        * `schema`: A Pydantic model (schema) class
+
         """
         self.model = model
 
