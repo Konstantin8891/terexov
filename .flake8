@@ -1,0 +1,15 @@
+[flake8]
+ignore =
+    D100,
+    D101,
+    D102,
+    D103,
+    D200
+exclude =
+    */alembic/,
+    venv/,
+    env/
+per-file-ignores =
+    */__init__.py:F401
+max-complexity = 10
+max-line-length = 120
